@@ -120,8 +120,6 @@ jugadores[i].nombre,jugadores[i].usuario,jugadores[i].contra);
 fclose(pf); // Cerramos fichero
 return 0;
 }
-
-
 }
 int Movimiento(posicion*player){
   punto p1 = {0, 0};
@@ -184,4 +182,19 @@ void horizontal(punto *xy, int n)
 void vertical(punto *xy, int n)
 {
     xy->y += n;
+}
+
+
+int MapaLaberinto(laberinto* laberinto)
+{ // Definimos tres vectores cualesquiera
+int i;
+FILE *pf;
+pf = fopen("laberinto1.txt", "r"); // Abrimos el fichero para lectura
+while (fscanf(pf, " %d; %d; %d\n", != EOF)
+{// Mostramos en pantalla
+printf("%s\n");
+i++;
+}
+fclose(pf);
+	return 0;
 }
