@@ -217,7 +217,17 @@ int DimensionLaberintos( const char* archivo,laberinto* laberinto){
 	fclose(pf);  
 	return MatrizLaberinto(archivo, laberinto);
 }
-int MatrizLaberinto ()
+int MatrizLaberinto (char *filename ){
+FILE *pf;
+pf= fopen(archivo,"r");
+if(pf==NULL){
+printf("Error al abrir el archivo.\n");
+		return 0;
+	}
+	else{
+		while(fscanf(pf,"%c",&c) != EOF){
+			
+}
 
 void PedirPuntoInicial(coordendas *player){
 	int x;
