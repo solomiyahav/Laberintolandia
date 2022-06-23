@@ -16,12 +16,16 @@ float x;
 typedef struct{ 
 int largo;
   int ancho;
+	int dimension;
 }laberinto;
 
 int InicioSesion( const char* registro);
 int Movimiento(posicion*player);
 void horizontal(punto *xy, int n);
 void vertical(punto *xy, int n);
+int DimensionLaberintos( const char* archivo,laberinto* laberinto);
+int MatrizLaberinto(archivo, laberinto);
+
 
 int InicioSesion(const char* registro){
 	int i;
@@ -117,10 +121,11 @@ else {// Si ha funcionado, comienza escritura
   printf("Introduaca su nombre, su usuario y su contraseña en el orden dado\n");
 fprintf(pf, " %s, %s, %d",
 jugadores[i].nombre,jugadores[i].usuario,jugadores[i].contra);
+}
 fclose(pf); // Cerramos fichero
 return 0;
 }
-}
+	
 int Movimiento(posicion*player){
   punto p1 = {0, 0};
   char boton;
@@ -183,18 +188,53 @@ void vertical(punto *xy, int n)
 {
     xy->y += n;
 }
-
-
-int MapaLaberinto(laberinto* laberinto)
-{ // Definimos tres vectores cualesquiera
-int i;
-FILE *pf;
-pf = fopen("laberinto1.txt", "r"); // Abrimos el fichero para lectura
-while (fscanf(pf, " %d; %d; %d\n", != EOF)
-{// Mostramos en pantalla
-printf("%s\n");
-i++;
+       
+int DimensionLaberintos( const char* archivo,laberinto* laberinto){
+	FILE* pf;
+	char c;
+	int filas=0;
+	int columnas=0;
+	int lineas=0;
+	pf= fopen(archivo,"r");
+	if(pf==NULL){
+		printf("Error al abrir el archivo.\n");
+		return 0;
+	}
+	else{
+	if(pf != NULL){//con lo siguiente leeremos carácter a carácter hasta encontrar EOF
+		while(fscanf(pf,"%c",&c) != EOF){
+			if(c=="\n"){
+				filas++;//si se ha leido se incrementa el numero de filas
+			}
+			else if (c==' '){
+				columnas ++;// si se ha leido se incrementa el numero de columnas
+			}
+		}
+		laberinto->largo = filas;
+        laberinto->ancho = columnas; 
+}    
+	}
+	fclose(pf);  
+	return MatrizLaberinto(archivo, laberinto);
 }
-fclose(pf);
-	return 0;
-}
+int MatrizLaberinto ()
+
+void PedirPuntoInicial(coordendas *player){
+	int x;
+	int y;
+	printf("Introduzca la posición X e Y del punto inicial\n");
+	scanf("%d %d",&x,&y);
+    int posicionCorrecta = 0;
+        if(x < 0 || x >= laberinto.ancho && y < 0 || y >= laberinto.largo)
+        {
+            printf("!!Error!!\n");
+	}
+        else// guardamos coordendas de un jugador
+        {
+        	posicioncorrecta=1;
+            jugador->x = x;
+            jugador->y = y;
+        }
+    }
+    
+	
